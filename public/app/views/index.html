@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html ng-app="MyApp">
+<head>
+	<base href='/'>
+
+	<title>Icharts</title>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="app/views/css/style.css">
+	<link rel="stylesheet" type="text/css" href="app/views/css/font-awesome.css">
+	<link rel="stylesheet" type="text/css" href="app/views/css/material-design-iconic-font.css">
+	<link type="text/css" rel="stylesheet" href="app/views/css/bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="app/views/css/layout.css">
+    <link type="text/css" rel="stylesheet" href="app/views/css/common.css">
+    <link type="text/css" rel="stylesheet" href="app/views/css/responsive.css">
+
+	
+
+
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular-route.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi?ext.js"></script>
+	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+
+
+	<!-- Services -->
+	<script type="text/javascript" src="app/services/authService.js"></script>
+	<script type="text/javascript" src="app/services/userService.js"></script>
+	<script type="text/javascript" src="app/services/storyService.js"></script>
+	<!-- Controllers -->
+	<script type="text/javascript" src="app/controllers/mainCtrl.js"></script>
+	<script type="text/javascript" src="app/controllers/userCtrl.js"></script>
+	<script type="text/javascript" src="app/controllers/storyCtrl.js"></script>
+	<!-- Directives -->
+	<script type="text/javascript" src="app/directives/reverse.js"></script>
+
+	<script type="text/javascript" src="app/app.routes.js"></script>
+	<script type="text/javascript" src="app/app.js"></script>
+
+	<script src="app/views/js/lib/jquery.js"></script>
+	<script src="app/views/js/lib/bootstrap.js"></script>
+
+	<script src="app/views/js/lib/nav.accordion.js"></script>
+	<script src="app/views/js/lib/hammerjs.js"></script>
+	<script src="app/views/js/lib/jquery.hammer.js"></script>
+	<script src="app/views/js/lib/jquery.slimscroll.js"></script>
+	<script src="app/views/js/apps.js"></script>
+
+</head>
+<body ng-controller="MainController as main" class="overlay-leftbar">
+
+<header class="topbar clearfix">
+	<div class="topbar-left pull-left">
+        <div class="clearfix">
+            <ul class="left-branding pull-left clickablemenu ttmenu dark-style menu-color-gradient">
+                <li><span class="left-toggle-switch"><i class="zmdi zmdi-menu"></i></span></li>
+                
+            </ul>
+
+            <!--Mobile Search and Rightbar Toggle-->
+   		</div>
+	</div>
+	<div class="topbar-right pull-right" >
+		<div class="clearfix">
+			<ul class="pull-right list-inline">
+				<li ng-if="!main.loggedIn"><a href="/login">Login</a></li>
+				<li ng-if="!main.loggedIn"><a href="/signup">Signup</a></li>
+				<li ng-if="main.loggedIn"><a href="#">Hello {{ main.user.username }}</a></li>
+				<li ng-if="main.loggedIn"><a href="#" ng-click="main.doLogout()">Logout</a></li>
+			</ul>
+		</div>
+	</div>
+
+		
+	<!--<div class="navbar navbar-default">
+		<div class="container">
+			<div class="navbar-header">
+				<a href="/" class="navbar-brand"><img class="logo" src="app/views/images/icharts_logo.png"></a>
+
+			</div>
+
+			<ul class="nav navbar-nav">
+				<li><a href="/users"></a></li>
+			</ul>
+
+			<ul class="nav navbar-nav navbar-right">
+				<li ng-if="!main.loggedIn"><a href="/login">Login</a></li>
+				<li ng-if="!main.loggedIn"><a href="/signup">Signup</a></li>
+				<li ng-if="main.loggedIn"><a href="#">Hello {{ main.user.username }}</a></li>
+				<li ng-if="main.loggedIn"><a href="#" ng-click="main.doLogout()">Logout</a></li>
+			</ul>
+		</div>
+
+	</div>-->
+</header>
+<aside class="leftbar">
+    <div class="left-aside-container">
+        
+        <ul class="list-accordion tree-style">
+            <li class="list-title">Layouts</li>
+            <li>
+                <a href="#"><i class="zmdi zmdi-view-dashboard"></i><span class="list-label">Layouts Variations</span></a>
+                <ul>
+                    <li><a href="/boxed-layout">Boxed Layout</a></li>
+                    <li><a href="/iconic-leftbar">Iconic Leftbar</a></li>
+                    <li><a href="/">Material Styled Leftbar</a></li>
+                    <li><a href="/">Tile Leftbar</a></li>
+                    <li><a href="/">With Language Bar</a></li>
+                    <li><a href="/">Topbar User Thumb</a></li>
+                    <li><a href="/">Tabby Leftbar</a></li>
+                    <li><a href="/">Only Notifications Rightbar</a></li>
+                    <li><a href="/">Without Rightbar</a></li>
+                    <li><a href="/">Activities Rightbar</a></li>
+                </ul>
+            </li>
+            <li class="list-title">Forms</li>
+            <li>
+                <a href="#"><i class="zmdi zmdi-view-web"></i><span class="list-label">From Elements</span></a>
+                <ul>
+                    <li><a href="/">All Form Elements</a></li>
+                    <li><a href="/">Basic Form Elements</a></li>
+                    <li><a href="/">Material Form Elements</a></li>
+                    <li><a href="/">All Icons Labels</a></li>
+                    <li><a href="/">Clone Form ELements </a></li>
+                    <li><a href="/">Autocomplete </a></li>
+                    <li><a href="/">Currency Format</a></li>
+                    <li><a href="/">Form Success State </a></li>
+                    <li><a href="/">Form Error State </a></li>
+                    <li><a href="/">Form Disable State </a></li>
+                    
+                </ul>
+            </li>
+            <li>
+                <a href="#"><i class="zmdi zmdi-check"></i><span class="list-label">From Validations</span></a>
+                <ul>
+                    <li><a href="/">Form Validation</a></li>
+                    <li><a href="/">Booking Form</a></li>
+                    <li><a href="/">Call Me Form </a></li>
+                    <li><a href="/">Call Me Cptacha Form </a></li>
+                    <li><a href="/">Checkout Form </a></li>
+                    <li><a href="/">Order Form </a></li>
+                    <li><a href="/">Order Form With Quantity </a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"><i class="zmdi zmdi-swap"></i><span class="list-label">From Wizard</span></a>
+                <ul>
+                    <li><a href="/">Default Style Wizard</a></li>
+                    <li><a href="/">Tab Style Wizard</a></li>
+                    <li><a href="/">Number Style Wizard</a></li>
+                    <li><a href="/">Checkout Form Wizard</a></li>
+                </ul>
+            </li>
+            <li class="list-title">Tables</li>
+            <li>
+                <a href="#"><i class="zmdi zmdi-grid"></i><span class="list-label">Table Styles</span></a>
+                <ul>
+                    <li><a href="/">Basic Styles</a></li>
+                    <li><a href="/">Responsive FooTables </a></li>
+                    <li><a href="/">Data Tables</a></li>
+                    <li><a href="/">Exportable Data Tables</a></li>
+                </ul>
+            </li>
+            <li class="list-title">Charts</li>
+            <li>
+                <a href="#"><i class="zmdi zmdi-chart"></i><span class="list-label">Charts & Graphs</span></a>
+                <ul>
+                    <li><a href="/">Flot Chart</a></li>
+                    <li><a href="/">Sparkline Chart</a></li>
+                    <li><a href="/">Chart Js</a></li>
+                    <li><a href="/">nvd3.js</a></li>
+                </ul>
+            </li>
+            <li class="list-title">Ui Kits</li>
+            <li>
+                <a href="#"><i class="zmdi zmdi-apps"></i><span class="list-label">Ui Elements</span></a>
+                <ul>
+                    <li><a href="header.html">Page Header</a></li>
+                    <li><a href="buttons-icons.html">Buttons &amp; Icons</a></li>
+                    <li><a href="noty.html">Noty</a></li>
+                    <li><a href="bootbox.html">Bootbox</a></li>
+                    <li><a href="sweet-alerts.html">SweetAlert</a></li>
+                    <li><a href="no-ui-slider.html">NoUI Slider</a></li>
+                    <li><a href="on-off-switch.html">On/Off Switch</a></li>
+                </ul>
+            </li>
+            <li><a href="ui-widgets.html"><i class="zmdi zmdi-widgets"></i><span class="list-label">Ui Widgtes</span></a></li>
+            <li><a href="calendar.html"><i class="zmdi zmdi-calendar-alt"></i><span class="list-label">Calendar</span></a></li>
+            <li><a href="typography.html"><i class="zmdi zmdi-format-size"></i><span class="list-label">Typography</span></a></li>
+            <li><a href="grid.html"><i class="zmdi zmdi-border-all"></i><span class="list-label">Grid</span></a></li>
+            <li class="list-title">Pages</li>
+            <li>
+                <a href="#"><i class="zmdi zmdi-view-dashboard"></i><span class="list-label">Extra Pages</span></a>
+                <ul>
+                     <li ng-if="!main.loggedIn"><a href="/login">Login</a></li>
+				     <li ng-if="!main.loggedIn"><a href="/signup">Signup</a></li>
+				     
+                </ul>
+            </li>
+        </ul>
+    </div>
+</aside>
+	
+
+
+
+
+<main class="container">
+
+	<div ng-view></div>
+</main>
+
+</body>
+</html>

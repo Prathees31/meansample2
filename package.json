@@ -1,0 +1,26 @@
+{
+  "name": "meansample",
+  "version": "0.0.0",
+  "description": "This sample mean web Application",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Prathees31/meanapp.git"
+  },
+  "author": "pratheesgs",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/Prathees31/meanapp/issues"
+  },
+  "dependencies": {
+    "morgan": "~1.7.0",
+    "body-parser": "~1.15.2",
+    "express": "~4.14.0",
+    "mongoose": "~4.7.2",
+    "bcrypt-nodejs": "0.0.3",
+    "jsonwebtoken": "~7.2.1"
+  }
+}
