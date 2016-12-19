@@ -16,15 +16,14 @@ angular.module('appRoutes', ['ngRoute'])
 		.when('/signup', {
 			templateUrl: 'app/views/pages/signup.html'
 		})
-<<<<<<< HEAD
+
 		.when('/boxed-layout', {
 			templateUrl: 'app/views/pages/boxed-layout.html'
 		})
 		.when('/iconic-leftbar', {
 			templateUrl: 'app/views/pages/iconic-leftbar.html'
 		})
-=======
->>>>>>> f4081a350fe38ec09f7059106c1debb21c031686
+
 
 		.when('/allStories', {
 			templateUrl: 'app/views/pages/allStories.html',
