@@ -1,4 +1,4 @@
-angular.module('MyApp', ['appRoutes', 'mainCtrl', 'authService', 'userCtrl', 'userService', 'storyService', 'storyCtrl', 'reverseDirective','googlechart','google-chart-sample'])
+angular.module('MyApp', ['appRoutes', 'mainCtrl', 'authService', 'userCtrl', 'userService', 'storyService', 'storyCtrl', 'reverseDirective','googlechart','google-chart-sample', 'chartService'])
 
 .config(function($httpProvider) {
 

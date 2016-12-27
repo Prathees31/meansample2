@@ -1,8 +1,8 @@
 <div class="container">
-<article class="post-content" ng-controller="FatChartCtrl">
-    <div>
+<div class="post-content" ng-controller="FatChartCtrl">
+    <div class="col-md-12 row">
 
-    <div>
+    <div class="col-md-6">
         <h2>Live edit</h2>
 
         <form class="form-horizontal" role="form">
@@ -10,6 +10,14 @@
                 <label class="control-label" for="chart-data-rows-1-3-v">February server sale units</label>
 
                 <input class="form-control" type="number" min="0" max="100" ng-model="chart.data.rows[1].c[3].v" id="chart-data-rows-1-3-v"
+                />
+                <label class="control-label" for="chart-data-rows-2-4-v">March shipping units</label>
+
+                <input class="form-control" type="number" min="0" max="100" ng-model="chart.data.rows[2].c[4].v" id="chart-data-rows-2-4-v"
+                />
+                <label class="control-label" for="chart-options-title">Name Change</label>
+
+                <input class="form-control" type="text" min="0" max="100" ng-model="chart.options.title" id="chart-options-title"
                 />
             </div>
             <div class="form-group">
@@ -20,17 +28,13 @@
             </div>
 
             <div class="form-group">
-                <label for="chartType">Chart type</label>
+                <label for="chartType">Chart type</label>e
 
                 <select class="form-control" id="chartType" ng-model="chart.type" ng-change="chartSelectionChange()">
-                    <option value="AreaChart">AreaChart</option>
-                    <option value="PieChart">PieChart</option>
-                    <option value="ColumnChart">ColumnChart</option>
+                    
                     <option value="LineChart">LineChart</option>
-                    <option value="Table">Table</option>
-                    <option value="BarChart">BarChart</option>
-                    <option value="CandlestickChart">CandlestickChart</option>
-                    <option value="ComboChart">ComboChart</option>
+                    
+                   
                 </select>
 
             </div>
@@ -51,6 +55,7 @@
                     </label>
                 </div>
             </div>
+            <button class="btn-default" type="submit" value="Add Data"></button>
 
             <div class="form-group" ng-show="chart.type=='Table'">
                 <label for="chartType">Format</label>
@@ -61,11 +66,14 @@
                     </li>
                 </ul>
             </div>
+
         </form>
+
     
     </div>
 
-    <div class="col-xs-7" style="padding-bottom: 23px;">
+    <div class="col-md-6" >
+         <h2>Visulazation Of Graphs</h2>
         <div google-chart chart="chart" style="{{cssStyle}}" on-ready="chartReady()"></div>
         <!-- explicit close of tag seems to be necessary -->
     </div>
@@ -79,5 +87,5 @@
     <pre>$scope.chartObject = {{chart|json}}</pre>
     </div> -->
 </div>
-  </article>
+  </div>
 </div>

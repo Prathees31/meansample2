@@ -1,5 +1,6 @@
 var User = require('../models/user');
 var Story = require('../models/story');
+var chart = require('../models/chart')
 var config = require('../../config');
 
 var secretKey = config.secretKey;
@@ -25,6 +26,18 @@ module.exports = function(app, express, io) {
 
 
 	var api = express.Router();
+
+	api.get('/iconic-leftbar', function(req, res) {
+		
+		chart.find({}, function(err, chart) {
+			console.log("Chart " , chart);
+			if(err) {
+				res.send(err);
+				return;
+			}
+			res.json(chart);
+		});
+	});
 
 	api.get('/all_stories', function(req, res) {
 		
