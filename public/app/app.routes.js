@@ -17,11 +17,11 @@ angular.module('appRoutes', ['ngRoute'])
 			templateUrl: 'app/views/pages/signup.html'
 		})
 
-		.when('/boxed-layout', {
+		.when('/candlestick', {
 			templateUrl: 'app/views/pages/boxed-layout.html'
 		})
-		.when('/iconic-leftbar', {
-			templateUrl: 'app/views/pages/iconic-leftbar.html'
+		.when('/line-chart', {
+			templateUrl: 'app/views/pages/line-chart.html'
 		})
 
 
