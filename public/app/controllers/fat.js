@@ -6,142 +6,86 @@
 
 .controller("FatChartCtrl", function($scope, $http, socketio, chart) {
 
-        var chart = {};
-    chart.type ="LineChart",
-    chart.displayed ="false",
-    chart.data = {
-        "cols": [
-            {
-                "id": "month",
-                "label": "Month",
-                "type": "string"
-            },
-            {
-                "id": "laptop-id",
-                "label": "Laptop",
-                "type": "number"
-            },
-            {
-                "id": "desktop-id",
-                "label": "Desktop",
-                "type": "number"
-            },
-            {
-                "id": "server-id",
-                "label": "Server",
-                "type": "number"
-            },
-            {
-                "id": "cost-id",
-                "label": "Shipping",
-                "type": "number"
+    var vm = {};
+
+    var responseData = [];
+    var symbol = 'HP';
+    responseData.data = [];
+    vm.type ="LineChart",
+    vm.displayed ="false",
+
+    $scope.loadData = function(){
+        if ($scope.month === 'three-months') {
+            $scope.fromDate = new Date();
+            $scope.fromDate.setDate($scope.fromDate.getDate()-90);
+            $scope.fromDate = $scope.fromDate.toISOString().slice(0,10);
+            console.log($scope.fromDate);
+            $scope.toDate = new Date().toISOString().slice(0,10);
+            $scope.chart.data = [['date', $scope.symbol]];   
+           chart.all($scope.symbol, $scope.fromDate, $scope.toDate)
+            .success(function(data) {
+                
+            for ( var i in data ){
+                    $scope.chart.data.push([data[i]['date'],data[i]['value']]);
             }
-        ],
-        "rows": [
-            {
-                "c": [
-                    {
-                        "v": "January"
-                    },
-                    {
-                        "v": 19,
-                        "f": "42 items"
-                    },
-                    {
-                        "v": 12,
-                        "f": "Ony 12 items"
-                    },
-                    {
-                        "v": 7,
-                        "f": "7 servers"
-                    },
-                    {
-                        "v": 4,
-                        "f": " only 4 Shipped"
-                    }
-                ]
-            },
-            {
-                "c": [
-                    {
-                        "v": "February"
-                    },
-                    {
-                        "v": 13
-                    },
-                    {
-                        "v": 1,
-                        "f": "1 unit (Out of stock this month)"
-                    },
-                    {
-                        "v": 12
-                    },
-                    {
-                        "v": 2
-                    }
-                ]
-            },
-            {
-                "c": [
-                    {
-                        "v": "March"
-                    },
-                    {
-                        "v": 24
-                    },
-                    {
-                        "v": 5
-                    },
-                    {
-                        "v": 11
-                    },
-                    {
-                        "v": 6
-                    }
-                ]
-            },
-            {
-                "c": [
-                    {
-                        "v": "April"
-                    },
-                    {
-                        "v": 55
-                    },
-                    {
-                        "v": 66
-                    },
-                    {
-                        "v": 52
-                    },
-                    {
-                        "v": 48
-                    }
-                ]
-            },
-            {
-                "c": [
-                    {
-                        "v": "May"
-                    },
-                    {
-                        "v": 5
-                    },
-                    {
-                        "v": 6
-                    },
-                    {
-                        "v": 2
-                    },
-                    {
-                        "v": 4
-                    }
-                ]
+        });
+        }
+        if ($scope.month === 'six-months') {
+            $scope.fromDate = new Date();
+            $scope.fromDate.setDate($scope.fromDate.getDate()-180);
+            $scope.fromDate = $scope.fromDate.toISOString().slice(0,10);
+            console.log($scope.fromDate);
+            $scope.toDate = new Date().toISOString().slice(0,10);
+            $scope.chart.data = [['date', $scope.symbol]];   
+           chart.all($scope.symbol, $scope.fromDate, $scope.toDate)
+            .success(function(data) {
+                
+            for ( var i in data ){
+                    $scope.chart.data.push([data[i]['date'],data[i]['value']]);
             }
-        ]
-    };
+        });
+        }
+
         
-        chart.options = {
+        /* $scope.chart.data = [['date', $scope.symbol]];   
+        chart.all($scope.symbol, $scope.fromDate, $scope.toDate)
+            .success(function(data) {
+                
+            for ( var i in data ){
+                    $scope.chart.data.push([data[i]['date'],data[i]['value']]);
+            }
+        });  */
+    }
+    /*[
+          ['Date', 'HP'],
+          [new Date(2015, 1, 1),1000],
+          ['2005',  450],
+          ['2006',  170],
+          ['2007',  2170],
+          ['2008',  370],
+          ['2010',  570],
+          ['2011',  470],
+          ['2012',  370],
+          ['2013',  870],
+          ['2014',  4270],
+          ['2015',  3270],
+          ['2016',  2270],
+          ['2017',  3370],
+          ['2018',  8870],
+          ['2019',  1170],
+          ['2020',  1970],
+          ['2021',  2870],
+          ['2022',  1670],
+          ['2023',  1870],
+          ['2024',  1370],
+          ['2025',  1270],
+          ['2026',  1070],
+          ['2027',  110],
+
+        ]*/
+    
+        
+        vm.options = {
             "title": "Sales per month",
             "isStacked": "true",
             "fill": 20,
@@ -149,11 +93,15 @@
             "vAxis": {
                 "title": "Sales unit",
                 "gridlines": {
-                    "count": 10
+                    "count": 5
                 }
             },
             "hAxis": {
-                "title": "Date"
+                "format": "dd/MMM/yyyy",
+                "title": "Date",
+                "gridlines": {
+                    "count": 15
+                }
             }
         };
 
@@ -207,12 +155,15 @@
             }]
         }];
 
-        chart.formatters = {};
+        vm.formatters = {};
 
-        $scope.chart = chart;
+        $scope.chart = vm;
         $scope.cssStyle = "height:300px; width:100%;";
-
+        
         $scope.chartSelectionChange = function() {
+
+
+
 
             if (($scope.chart.type === 'Table' && $scope.chart.data.cols.length === 6 && $scope.chart.options.tooltip.isHtml === true) ||
                 ($scope.chart.type !== 'Table' && $scope.chart.data.cols.length === 6 && $scope.chart.options.tooltip.isHtml === false)) {

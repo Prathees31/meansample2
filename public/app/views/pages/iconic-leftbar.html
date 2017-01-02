@@ -7,7 +7,7 @@
 
         <form class="form-horizontal" role="form">
             <div class="form-group ">
-                <label class="control-label" for="chart-data-rows-1-3-v">February server sale units</label>
+               <!-- <label class="control-label" for="chart-data-rows-1-3-v">February server sale units</label>
 
                 <input class="form-control" type="number" min="0" max="100" ng-model="chart.data.rows[1].c[3].v" id="chart-data-rows-1-3-v"
                 />
@@ -15,30 +15,66 @@
 
                 <input class="form-control" type="number" min="0" max="100" ng-model="chart.data.rows[2].c[4].v" id="chart-data-rows-2-4-v"
                 />
-                <label class="control-label" for="chart-options-title">Name Change</label>
+                <label class="control-label" for="chart-options-title">Name Change</label> -->
 
                 <input class="form-control" type="text" min="0" max="100" ng-model="chart.options.title" id="chart-options-title"
                 />
             </div>
-            <div class="form-group">
+            <!--<div class="form-group">
                 <label class="control-label" for="chart-options-vAxis-gridlines-count">Number of grid lines</label>
 
                 <input class="form-control" type="number" min="0" max="100" ng-model="chart.options.vAxis.gridlines.count" id="chart-options-vAxis-gridlines-count"
                 />
+            </div> -->
+            <div class="form-group">
+                <input type="button" name="refresh" value="Refresh Data" ng-click="loadData()"/>
+                <label for="symbol">Chart Data</label>
+                <input type="text" name="symbol" id="symbol" ng-model="symbol" value="HP" placeholder="HP" >
+                
+                 <br>
+
+                 <label for="month">Pre Defined</label>
+                 <select class="form-control" id="month" ng-model="month" ng-change="loadData()">
+
+                    <option value="three-months">three-months</option>
+                    <option  value="six-months">six-Months</option>
+                     
+
+                 </select>
+                 <br>
+                 <label for="fromDate">FromDate</label>
+                 <input type="text" name="fromDate" id="fromDate" ng-model="fromDate" value="fromDate" placeholder="2016-01-01">
+
+                 <label for="toDate">toDate</label>
+                 <input type="text" name="toDate" id="toDate" ng-model="toDate" value="toDate" placeholder="yyy-mm-dd">
+
+
+
+
+
+               <!--          
+               <select class="form-control" id="chartData" ng-model="symbol" ng-change="loadData()">
+                    
+                    <option value="HP">HP</option>
+                    <option  value="INFY">INFY</option>
+                    
+                    
+                </select> -->
+
             </div>
 
             <div class="form-group">
-                <label for="chartType">Chart type</label>e
+                <label for="chartType">Chart type</label>
 
                 <select class="form-control" id="chartType" ng-model="chart.type" ng-change="chartSelectionChange()">
                     
                     <option value="LineChart">LineChart</option>
+                    <option value="Table">Table</option>
                     
-                   
                 </select>
 
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <div class="checkbox">
                     <label for="hideServer">
                         <input id="hideServer" type="checkbox" ng-model="hideServer" ng-change="selectionChange()" /> Hide Server Data</label>
@@ -46,16 +82,16 @@
                 </div>
 
 
-            </div>
+            </div> -->
 
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <div class="checkbox">
                     <label for="htmlTooltip" ng-show="chart.type!='Table'">
                         <input id="htmlTooltip" type="checkbox" ng-model="chart.options.tooltip.isHtml" ng-change="htmlTooltip()" /> Remove Html Tooltip
                     </label>
                 </div>
-            </div>
-            <button class="btn-default" type="submit" value="Add Data"></button>
+            </div> -->
+            
 
             <div class="form-group" ng-show="chart.type=='Table'">
                 <label for="chartType">Format</label>

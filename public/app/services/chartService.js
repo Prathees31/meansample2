@@ -6,10 +6,10 @@ angular.module('chartService', [])
 	var chartFactory = {};
 
 
-	chartFactory.all = function(chart) {
-		return $http.get('/api/iconic-leftbar');
+	chartFactory.all = function(symbol, fromDate, toDate) {
+		var data = $http.get('/api/iconic-leftbar/'+symbol+'/'+fromDate+'/'+toDate);
+		return data;
 	}
-
 
 
 	return chartFactory;

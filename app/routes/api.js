@@ -27,9 +27,9 @@ module.exports = function(app, express, io) {
 
 	var api = express.Router();
 
-	api.get('/iconic-leftbar', function(req, res) {
+	api.get('/iconic-leftbar/:symbol/:fromDate/:toDate', function(req, res) {
 		
-		chart.find({}, function(err, chart) {
+		chart.find({"$and": [{"date": {"$gt": req.params.fromDate,"$lte": req.params.toDate}},{"symbol": req.params.symbol}]}, function(err, chart) {
 			console.log("Chart " , chart);
 			if(err) {
 				res.send(err);
